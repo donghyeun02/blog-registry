@@ -2,6 +2,8 @@
 pragma solidity ^0.8.0;
 
 contract BlogRegistry {
+    address public owner; // 소유자 주소 추가
+    
     mapping(address => string[]) public userPosts;
     string[] public allPosts;
     
@@ -18,10 +20,19 @@ contract BlogRegistry {
     event PostDeleted(address indexed author, string cid, uint256 timestamp);
     event PostUpdated(address indexed author, string oldCid, string newCid, uint256 timestamp);
     
-    function registerPost(string memory cid) public {
+    constructor() {
+        owner = msg.sender;
+    }
+    
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can call this function");
+        _;
+    }
+    
+    // 글 등록 - Owner만 가능
+    function registerPost(string memory cid) public onlyOwner {
         require(bytes(cid).length > 0, "CID cannot be empty");
         require(!postDetails[cid].exists, "Post already exists");
-        
         
         PostInfo memory newPost = PostInfo({
             cid: cid,
@@ -37,6 +48,7 @@ contract BlogRegistry {
         emit PostRegistered(msg.sender, cid, block.timestamp);
     }
     
+    // 읽기 함수들 - 누구나 가능
     function getUserPosts(address user) public view returns (string[] memory) {
         return userPosts[user];
     }
@@ -54,9 +66,9 @@ contract BlogRegistry {
         return postDetails[cid];
     }
     
-    function deletePost(string memory cid) public {
+    // 글 삭제 - Owner만 가능
+    function deletePost(string memory cid) public onlyOwner {
         require(postDetails[cid].exists, "Post does not exist");
-        require(postDetails[cid].author == msg.sender, "Only author can delete post");
         
         delete postDetails[cid];
         
@@ -80,9 +92,9 @@ contract BlogRegistry {
         emit PostDeleted(msg.sender, cid, block.timestamp);
     }
     
-    function updatePost(string memory oldCid, string memory newCid) public {
+    // 글 수정 - Owner만 가능
+    function updatePost(string memory oldCid, string memory newCid) public onlyOwner {
         require(postDetails[oldCid].exists, "Old post does not exist");
-        require(postDetails[oldCid].author == msg.sender, "Only author can update post");
         require(bytes(newCid).length > 0, "New CID cannot be empty");
         require(!postDetails[newCid].exists, "New CID already exists");
         
@@ -115,6 +127,7 @@ contract BlogRegistry {
         emit PostUpdated(msg.sender, oldCid, newCid, block.timestamp);
     }
     
+    // 읽기 함수들 - 누구나 가능
     function getUserPostCount(address user) public view returns (uint256) {
         return userPosts[user].length;
     }
@@ -122,4 +135,10 @@ contract BlogRegistry {
     function postExists(string memory cid) public view returns (bool) {
         return postDetails[cid].exists;
     }
-} 
+    
+    // Owner 변경 함수 (선택사항)
+    function transferOwnership(address newOwner) public onlyOwner {
+        require(newOwner != address(0), "New owner cannot be zero address");
+        owner = newOwner;
+    }
+}

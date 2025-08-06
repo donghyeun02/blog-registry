@@ -1,0 +1,86 @@
+# Remix IDE specific
+.deps/
+.states/
+.remix/
+
+# Solidity artifacts
+artifacts/
+build/
+cache/
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies (if using npm/yarn)
+node_modules/
+
+# Contract deployment
+deployments/
+deployment.json
+
+# Private keys and secrets
+.secrets
+private-keys.txt
+mnemonic.txt
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Gas reports
+gas-report.txt
+
+# Contract verification
+.verification_cache/
+
+# Local blockchain data
+chaindata/
+keystore/
+
+# Ganache
+ganache-cli.log
+
+# Hardhat (if using)
+cache/
+typechain/
+typechain-types/
+
+# Foundry (if using)
+out/
+broadcast/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+
+# Backup files
+*.backup
+
+# Contract verification
+verification.json
+
+# Local development
+.local/
+local/

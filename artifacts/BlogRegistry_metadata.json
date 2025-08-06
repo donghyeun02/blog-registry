@@ -6,6 +6,11 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -224,6 +229,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -285,6 +303,19 @@
 					}
 				],
 				"name": "registerPost",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -360,11 +391,11 @@
 	},
 	"sources": {
 		"contracts/BlogRegistry.sol": {
-			"keccak256": "0xcf9735506f9dd6b7f2934de3912c9c47844836479a83c74a029e4010569990ce",
+			"keccak256": "0x9a095b1de526b7e9725bc0b2c1287c3e4f9a9bca6944984084510b62673604bf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4322e386ea43c53566737b0386930275a4ff1ed827dcc889098cca590e5959a4",
-				"dweb:/ipfs/QmZgpp22C3pau3QqoydLym7tcv4bmayQkgLGyd6P87H7uQ"
+				"bzz-raw://08642121ab2d2230fa35690e6226928e0f420de56847f9f31b7b365562a11157",
+				"dweb:/ipfs/QmYD8bXsLvXCRdGKZxE381AvnkA8HMBjxA2HFifgzgkPCy"
 			]
 		}
 	},
